@@ -3,8 +3,10 @@ package com.projedata.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-@Entity(name = "tb_pessoa")
+@Entity
+@Table(name = "tb_pessoa")
 public class Pessoa {
 
     @Id
@@ -18,7 +20,7 @@ public class Pessoa {
     @Column(name = "dt_nascimento")
     private LocalDate dataNascimento;
 
-    @OneToOne(mappedBy = "pessoa")
+    @OneToOne(mappedBy = "pessoa", cascade = CascadeType.ALL)
     private Funcionario funcionario;
 
     public Integer getId() {
@@ -47,9 +49,7 @@ public class Pessoa {
 
     @Override
     public String toString() {
-        return "Pessoa{" +
-                "  nome='" + nome + '\'' +
-                ", dataNascimento=" + dataNascimento +
-                '}';
+        return " nome='" + nome + '\'' +
+                ", dataNascimento=" + dataNascimento.format(DateTimeFormatter.ofPattern("dd/MM/YYYY")) ;
     }
 }

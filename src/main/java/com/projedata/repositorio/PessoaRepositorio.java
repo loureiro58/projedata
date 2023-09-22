@@ -10,14 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PessoaRepositorio extends JpaRepository<Pessoa, Integer> {
 
-    //Query Method
-//    List<Funcionario> findByNameContaining(String nome);
-
-    //Query Method
-  //  Funcionario findByUsername(String username);
-
-    @Query("DELETE FROM tb_pessoa WHERE nome LIKE %:nome%")
-    void deletarPessoaPorNome(@Param("nome") String nome);
-
+    @Query("Select p FROM com.projedata.model.Pessoa p WHERE p.nome LIKE %:nome%")
+    Pessoa findByNome(@Param("nome") String nome);
 
 }

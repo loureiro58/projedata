@@ -1,11 +1,11 @@
 package com.projedata.model;
 
 import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 
-@Entity(name = "tb_funcionario")
-public class Funcionario extends Pessoa{
+@Entity
+@Table(name = "tb_funcionario")
+public class Funcionario extends Pessoa implements Comparable<Funcionario>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -54,11 +54,16 @@ public class Funcionario extends Pessoa{
 
     @Override
     public String toString() {
-        return "Funcionario{" +
-                "id=" + id +
-                ", salario=" + salario +
-                ", funcao='" + funcao + '\'' +
+        return "Funcionario { " +
                 pessoa.toString() +
-                '}';
+                ", salario=" + salario +
+                ", funcao='" + funcao  + '\'' +
+                " } ";
     }
+
+    @Override
+    public int compareTo(Funcionario f) {
+        return pessoa.getNome().compareTo(f.getPessoa().getNome());
+    }
+
 }
